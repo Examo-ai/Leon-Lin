@@ -6,49 +6,94 @@
     <title>Lenos.ai | Leon Lin</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../css/project-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <!-- Same header as index.html -->
-    </header>
+<body class="project-page">
+    <div class="floating-nav">
+        <a href="../index.html" class="nav-btn glass-effect">
+            <i class="fas fa-arrow-left"></i>
+            <span>Zurück</span>
+        </a>
+        <a href="#" class="nav-btn glass-effect">
+            <i class="fas fa-rocket"></i>
+            <span>Live Demo</span>
+        </a>
+    </div>
 
-    <main class="project-details">
-        <section class="project-hero">
-            <h1>Lenos.ai</h1>
-            <p class="project-subtitle">KI-Integration mit moderner Benutzeroberfläche</p>
-            <img src="../assets/projects/lenos-ai-full.png" alt="Lenos.ai Screenshot">
-        </section>
-
-        <section class="project-content">
-            <div class="project-info">
-                <h2>Über das Projekt</h2>
-                <p>Lenos.ai ist eine Webanwendung, die die Leistungsfähigkeit von Gemini und Mistral API kombiniert...</p>
-                
-                <h2>Technologien</h2>
-                <ul class="tech-list">
-                    <li>HTML5 & CSS3</li>
-                    <li>JavaScript</li>
-                    <li>Gemini API</li>
-                    <li>Mistral API</li>
-                </ul>
-
-                <h2>Features</h2>
-                <ul class="feature-list">
-                    <li>Moderne UI/UX</li>
-                    <li>API Integration</li>
-                    <li>Responsive Design</li>
-                </ul>
-
-                <div class="project-links">
-                    <a href="#" class="btn primary-btn">Live Demo</a>
-                    <a href="#" class="btn secondary-btn">GitHub</a>
-                </div>
+    <div class="project-hero glass-container">
+        <div class="hero-content">
+            <h1 class="mega-title">Lenos<span class="highlight">.ai</span></h1>
+            <p class="glass-text">Eine moderne KI-Plattform, die die Leistung von Gemini und Mistral vereint</p>
+            <div class="tech-stack">
+                <span class="tech-pill">React</span>
+                <span class="tech-pill">Node.js</span>
+                <span class="tech-pill">AI APIs</span>
             </div>
-        </section>
-    </main>
+        </div>
+        <div class="hero-visual">
+            <div class="mockup-container">
+                <img src="https://via.placeholder.com/800x600/3a86ff/ffffff?text=Lenos.ai+Interface" 
+                     alt="Lenos.ai Interface" 
+                     class="floating-mockup">
+                <div class="glow-effect"></div>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <!-- Same footer as index.html -->
-    </footer>
+    <main class="project-content">
+        <div class="feature-grid">
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>KI-Integration</h3>
+                <p>Nahtlose Verbindung von Gemini und Mistral für optimale Ergebnisse</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Echtzeit</h3>
+                <p>Schnelle Verarbeitung und sofortige Antworten</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Sicherheit</h3>
+                <p>Verschlüsselte Kommunikation und Datenschutz</p>
+            </div>
+        </div>
+
+        <div class="project-showcase">
+            <h2>Features & Highlights</h2>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://via.placeholder.com/600x400/3a86ff/ffffff?text=Feature+1" 
+                         alt="Feature 1">
+                    <div class="showcase-info glass-effect">
+                        <h3>Intelligente Chatbots</h3>
+                        <p>Kontextbewusste Gespräche mit fortschrittlicher NLP</p>
+                    </div>
+                </div>
+                <!-- Add more showcase items -->
+            </div>
+        </div>
+
+        <div class="tech-details glass-container">
+            <h2>Technische Details</h2>
+            <div class="tech-list">
+                <div class="tech-item">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>React mit TypeScript</li>
+                        <li>Tailwind CSS</li>
+                        <li>Framer Motion</li>
+                    </ul>
+                </div>
+                <!-- Add more tech details -->
+            </div>
+        </div>
+    </main>
 </body>
 </html>

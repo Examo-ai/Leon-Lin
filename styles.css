@@ -38,6 +38,18 @@
     --radius-md: 0.5rem;
     --radius-lg: 1rem;
     --radius-full: 9999px;
+
+    /* Modern Color Palette */
+    --gradient-1: linear-gradient(120deg, #3a86ff 0%, #00c6ff 100%);
+    --gradient-2: linear-gradient(120deg, #ff006e 0%, #ff4d94 100%);
+    --gradient-3: linear-gradient(120deg, #8338ec 0%, #3a86ff 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --blur-size: 10px;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    
+    /* Animation Timings */
+    --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* ======== RESET & GRUNDLAGEN ======== */
@@ -347,6 +359,42 @@ header.scrolled {
         transform: scale(1.05);
         opacity: 0.7;
     }
+}
+
+/* Modern Card Styles */
+.modern-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur-size));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    transition: transform 0.3s var(--bounce);
+}
+
+.modern-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* 3D Hover Effect */
+.project-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.project-card:hover .project-image {
+    transform: rotateY(10deg) rotateX(5deg);
+}
+
+/* Animated Background */
+.gradient-bg {
+    background: var(--gradient-1);
+    background-size: 200% 200%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ======== ABOUT SECTION ======== */
