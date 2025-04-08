@@ -50,6 +50,15 @@
     
     /* Animation Timings */
     --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Modern Color Scheme */
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --neon-glow: 0 0 20px rgba(58, 134, 255, 0.5);
+    
+    /* Gradients */
+    --gradient-blue: linear-gradient(135deg, #3a86ff 0%, #00c6ff 100%);
+    --gradient-purple: linear-gradient(135deg, #8338ec 0%, #3a86ff 100%);
+    --gradient-pink: linear-gradient(135deg, #ff006e 0%, #ff4d94 100%);
 }
 
 /* ======== RESET & GRUNDLAGEN ======== */
@@ -182,6 +191,15 @@ header.scrolled {
 .nav-item {
     position: relative;
     font-weight: 500;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-color)) no-repeat;
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+}
+
+.nav-item:hover {
+    background-size: 100% 2px;
 }
 
 .nav-item::after {
@@ -384,6 +402,10 @@ header.scrolled {
     transform: rotateY(10deg) rotateX(5deg);
 }
 
+.project-card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+}
+
 /* Animated Background */
 .gradient-bg {
     background: var(--gradient-1);
@@ -395,6 +417,37 @@ header.scrolled {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+/* Modern Reveal Animations */
+.reveal-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Image Hover Effects */
+.project-image img {
+    transition: transform 0.5s cubic-bezier(0.5, 0, 0, 1);
+    filter: brightness(0.9);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1) translateZ(20px);
+    filter: brightness(1.1);
+}
+
+/* Glass Morphism */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 
 /* ======== ABOUT SECTION ======== */

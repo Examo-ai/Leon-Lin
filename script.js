@@ -144,4 +144,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Add smooth reveal animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px"
+    };
+
+    const revealCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    };
+
+    const revealObserver = new IntersectionObserver(revealCallback, observerOptions);
+
+    document.querySelectorAll('.project-card, .skill-item, .tool-item').forEach(el => {
+        el.classList.add('reveal-element');
+        revealObserver.observe(el);
+    });
+
+    // Add parallax effect
+    document.addEventListener('mousemove', (e) => {
+        const cards = document.querySelectorAll('.project-card');
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        cards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            const cardX = rect.left + rect.width / 2;
+            const cardY = rect.top + rect.height / 2;
+
+            const angleX = (mouseY - cardY) / 30;
+            const angleY = (mouseX - cardX) / -30;
+
+            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+        });
+    });
 });

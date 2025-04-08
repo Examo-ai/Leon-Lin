@@ -1,6 +1,8 @@
 .about-hero {
-    min-height: 100vh;
-    padding-top: 100px;
+    min-height: 60vh;
+    padding: 120px 2rem 2rem;
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(135deg, var(--background) 0%, var(--surface) 100%);
 }
 
@@ -12,13 +14,14 @@
 
 .timeline {
     position: relative;
-    margin: 50px 0;
+    padding: 4rem 0;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
     left: 50%;
+    top: 0;
     width: 2px;
     height: 100%;
     background: var(--primary-color);
@@ -27,16 +30,36 @@
 
 .timeline-item {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
+    justify-content: flex-end;
+    padding: 2rem 0;
+    width: 50%;
+    position: relative;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s ease forwards;
-    animation-delay: calc(var(--item-index) * 0.2s);
+    animation-delay: calc(var(--delay) * 0.2s);
 }
 
 .timeline-item:nth-child(even) {
-    flex-direction: row-reverse;
+    margin-left: 50%;
+    justify-content: flex-start;
+}
+
+.timeline-item::before {
+    content: attr(data-year);
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 1rem);
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: var(--radius-full);
+    transform: translateY(-50%);
+}
+
+.timeline-item:nth-child(even)::before {
+    right: auto;
+    left: calc(100% + 1rem);
 }
 
 .date {
@@ -96,5 +119,157 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+.about-page {
+    background: linear-gradient(135deg, var(--background) 0%, var(--surface) 100%);
+}
+
+.floating-nav {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+}
+
+.profile-section {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    position: relative;
+    z-index: 2;
+}
+
+.profile-bg {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-1);
+    border-radius: var(--radius-lg);
+    z-index: 1;
+}
+
+.profile-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.quick-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.quick-info span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.interest-card {
+    text-align: center;
+    padding: 2rem;
+}
+
+.interest-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.education-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.education-card {
+    padding: 2rem;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-header i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.achievement-list {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    color: var(--muted);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-section {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .quick-info {
+        justify-content: center;
+    }
+    
+    .timeline::before {
+        left: 0;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        padding-left: 2rem;
+    }
+    
+    .timeline-item:nth-child(even) {
+        margin-left: 0;
+    }
+    
+    .timeline-item::before {
+        left: -1rem;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+        left: -1rem;
     }
 }

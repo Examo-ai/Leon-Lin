@@ -3,81 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Über mich | Leon Lin</title>
+    <title>Über Mich | Leon Lin</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <!-- Same navigation as index.html -->
+<body class="about-page">
+    <nav class="floating-nav glass-effect">
+        <a href="index.html" class="nav-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Zurück</span>
+        </a>
+    </nav>
+
+    <header class="about-hero">
+        <div class="hero-content glass-container">
+            <div class="profile-section">
+                <div class="profile-image-container">
+                    <img src="https://via.placeholder.com/400x400" alt="Leon Lin" class="profile-image">
+                    <div class="profile-bg"></div>
+                </div>
+                <div class="profile-info">
+                    <h1>Leon Lin</h1>
+                    <p class="tagline">Schüler & Developer</p>
+                    <div class="quick-info">
+                        <span><i class="fas fa-map-marker-alt"></i> Berlin, Deutschland</span>
+                        <span><i class="fas fa-graduation-cap"></i> 10. Klasse</span>
+                        <span><i class="fas fa-code"></i> Full-Stack Entwickler</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="about-hero">
-            <div class="about-content">
-                <h1>Meine Geschichte</h1>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="date">2008</div>
-                        <div class="content">
-                            <h3>Geboren in Berlin</h3>
-                            <p>Der Start meiner Reise</p>
-                        </div>
+    <main class="about-content">
+        <section class="bio-section glass-container">
+            <h2>Meine Geschichte</h2>
+            <div class="bio-text">
+                <p>Hi, ich bin Leon! Mit 15 Jahren entwickle ich bereits leidenschaftlich Software und beschäftige mich intensiv mit künstlicher Intelligenz. Meine Reise begann mit einfachen HTML-Websites und hat sich zu komplexen Projekten mit KI und Spieleentwicklung entwickelt.</p>
+                <p>Als Schüler am Gymnasium kombiniere ich meine schulische Ausbildung mit praktischer Programmiererfahrung. Mein Ziel ist es, Technologie zu nutzen, um kreative und nützliche Lösungen zu entwickeln.</p>
+            </div>
+        </section>
+
+        <section class="journey-section">
+            <h2>Mein Weg</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="2008">
+                    <div class="timeline-content glass-card">
+                        <h3>Der Anfang</h3>
+                        <p>Geboren in Berlin</p>
                     </div>
-                    
-                    <div class="timeline-item">
-                        <div class="date">2020</div>
-                        <div class="content">
-                            <h3>Erste Schritte im Coding</h3>
-                            <p>Beginn mit HTML & CSS durch Online-Kurse</p>
-                        </div>
+                </div>
+                
+                <div class="timeline-item" data-year="2020">
+                    <div class="timeline-content glass-card">
+                        <h3>Erste Schritte im Coding</h3>
+                        <p>Beginn mit HTML & CSS durch Online-Kurse auf Codecademy</p>
+                        <ul class="achievement-list">
+                            <li>Erste eigene Website</li>
+                            <li>Basics der Webentwicklung</li>
+                        </ul>
                     </div>
-                    
-                    <div class="timeline-item">
-                        <div class="date">2021</div>
-                        <div class="content">
-                            <h3>Game Development</h3>
-                            <p>Start mit Godot Engine und Pixelart</p>
-                        </div>
+                </div>
+                
+                <div class="timeline-item" data-year="2021">
+                    <div class="timeline-content glass-card">
+                        <h3>Game Development</h3>
+                        <p>Einstieg in die Spieleentwicklung mit Godot</p>
+                        <ul class="achievement-list">
+                            <li>Erstes 2D Spiel entwickelt</li>
+                            <li>Pixel Art Design gelernt</li>
+                        </ul>
                     </div>
-                    
-                    <div class="timeline-item">
-                        <div class="date">2023</div>
-                        <div class="content">
-                            <h3>KI & Web Development</h3>
-                            <p>Entwicklung von Lenos.ai und weiteren Projekten</p>
-                        </div>
+                </div>
+                
+                <div class="timeline-item" data-year="2023">
+                    <div class="timeline-content glass-card">
+                        <h3>KI & Fortgeschrittene Projekte</h3>
+                        <p>Start von Lenos.ai und weiteren KI-Projekten</p>
+                        <ul class="achievement-list">
+                            <li>Integration von KI-APIs</li>
+                            <li>Full-Stack Entwicklung</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="education">
-            <h2>Bildung</h2>
-            <div class="education-grid">
-                <div class="education-item">
-                    <h3>Gymnasium</h3>
-                    <p>Aktuell in der 10. Klasse</p>
-                    <ul>
-                        <li>Leistungskurse: Mathematik & Informatik</li>
-                        <li>AG: Robotik & Programmierung</li>
-                    </ul>
+        <section class="interests-section glass-container">
+            <h2>Interessen & Hobbys</h2>
+            <div class="interests-grid">
+                <div class="interest-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Künstliche Intelligenz</h3>
+                    <p>Entwicklung von KI-gestützten Anwendungen und Chatbots</p>
                 </div>
                 
-                <div class="education-item">
-                    <h3>Online-Zertifikate</h3>
-                    <ul>
-                        <li>Codecademy Web Development</li>
-                        <li>FreeCodeCamp JavaScript</li>
-                        <li>Udemy Godot Game Development</li>
-                    </ul>
+                <div class="interest-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Gaming & Development</h3>
+                    <p>Spieleentwicklung und Pixel Art Design</p>
+                </div>
+                
+                <div class="interest-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Digital Design</h3>
+                    <p>UI/UX Design und Grafikdesign</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="education-section">
+            <h2>Bildung & Zertifikate</h2>
+            <div class="education-cards">
+                <div class="education-card glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-school"></i>
+                        <h3>Gymnasium</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Aktuell: 10. Klasse</p>
+                        <ul>
+                            <li>Leistungskurse: Mathematik & Informatik</li>
+                            <li>AG: Robotik & Programmierung</li>
+                            <li>Schulprojekte: Webseitenentwicklung</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="education-card glass-card">
+                    <div class="card-header">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Online Zertifikate</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>Codecademy Web Development Track</li>
+                            <li>FreeCodeCamp JavaScript Algorithms</li>
+                            <li>Udemy Godot Game Development</li>
+                            <li>Harvard CS50x (in Bearbeitung)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <!-- Same footer as index.html -->
-    </footer>
 </body>
 </html>
