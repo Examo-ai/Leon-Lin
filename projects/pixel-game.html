@@ -6,16 +6,30 @@
     <title>Pixel Adventure | Leon Lin</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="../css/project-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="project-page">
+    <div class="floating-nav">
+        <a href="../index.html" class="nav-btn glass-effect">
+            <i class="fas fa-arrow-left"></i>
+            <span>Zurück</span>
+        </a>
+        <a href="https://github.com/yourusername/pixel-adventure" class="nav-btn glass-effect" target="_blank">
+            <i class="fab fa-github"></i>
+            <span>Source Code</span>
+        </a>
+    </div>
+
     <div class="project-hero">
-        <div class="hero-bg" style="background-image: url('https://via.placeholder.com/1920x1080/3a86ff/ffffff?text=Pixel+Adventure')"></div>
-        <div class="hero-content">
-            <h1 class="glitch" data-text="Pixel Adventure">Pixel Adventure</h1>
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&h=1080&fit=crop')"></div>
+        <div class="hero-content glass-container">
+            <h1 class="mega-title">Pixel Adventure</h1>
+            <p class="hero-subtitle">Ein magisches 2D-RPG im Retro-Pixel-Art-Stil</p>
             <div class="tech-stack">
-                <span class="tech-badge">Godot</span>
-                <span class="tech-badge">GDScript</span>
-                <span class="tech-badge">Pixelart</span>
+                <span class="tech-pill">Godot Engine</span>
+                <span class="tech-pill">GDScript</span>
+                <span class="tech-pill">Pixilart</span>
+                <span class="tech-pill">Aseprite</span>
             </div>
         </div>
     </div>
@@ -23,98 +37,185 @@
     <main class="project-content">
         <div class="project-overview">
             <div class="overview-card">
-                <h2>Projektübersicht</h2>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Rolle</span>
-                        <span class="meta-value">Game Developer & Designer</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Zeitraum</span>
-                        <span class="meta-value">3 Monate</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Status</span>
-                        <span class="meta-value status-active">In Entwicklung</span>
-                    </div>
+                <h2>Spielübersicht</h2>
+                <div class="meta-item">
+                    <span class="meta-label">Genre</span>
+                    <span class="meta-value">2D Action RPG</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Engine</span>
+                    <span class="meta-value">Godot 4.0</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Plattformen</span>
+                    <span class="meta-value">Windows, macOS, Linux, Web</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status</span>
+                    <span class="status-badge status-active">In Entwicklung</span>
                 </div>
             </div>
 
-            <div class="project-details">
-                <h3>Das Spiel</h3>
-                <p>Ein faszinierendes 2D Top-down Adventure im Pixel-Art Stil. Der Spieler erkundet eine handgezeichnete Welt voller Geheimnisse und Rätsel.</p>
-                
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-gamepad"></i>
-                        <h4>Gameplay</h4>
-                        <p>Dynamische Kämpfe, Rätsel und RPG-Elemente</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-paint-brush"></i>
-                        <h4>Design</h4>
-                        <p>Handgezeichnete Pixel-Art Grafik</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-music"></i>
-                        <h4>Sound</h4>
-                        <p>Original Chiptune Soundtrack</p>
-                    </div>
-                </div>
-
-                <div class="development-process">
-                    <h3>Entwicklungsprozess</h3>
-                    <div class="process-timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h4>Konzeption</h4>
-                            <p>Erstellen der Spielmechaniken und Story</p>
+            <div class="gallery-section">
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1642176849879-781c33715d05?w=600&h=400&fit=crop" 
+                             alt="Gameplay Screenshot 1">
+                        <div class="gallery-overlay">
+                            <p class="gallery-caption">Magischer Wald Level</p>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h4>Asset Creation</h4>
-                            <p>Pixel-Art Grafiken und Animationen</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1640964828933-6d1aa17ce6b4?w=600&h=400&fit=crop" 
+                             alt="Gameplay Screenshot 2">
+                        <div class="gallery-overlay">
+                            <p class="gallery-caption">Höhlen der Kristalle</p>
                         </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <h4>Entwicklung</h4>
-                            <p>Implementierung in Godot Engine</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1472289065668-ce650ac443d2?w=600&h=400&fit=crop" 
+                             alt="Gameplay Screenshot 3">
+                        <div class="gallery-overlay">
+                            <p class="gallery-caption">Verlassenes Dorf</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="project-gallery">
-                    <h3>Galerie</h3>
-                    <div class="gallery-grid">
-                        <img src="https://via.placeholder.com/400x300" alt="Screenshot 1">
-                        <img src="https://via.placeholder.com/400x300" alt="Screenshot 2">
-                        <img src="https://via.placeholder.com/400x300" alt="Screenshot 3">
-                        <img src="https://via.placeholder.com/400x300" alt="Screenshot 4">
+        <section class="features-section">
+            <h2>Spielfeatures</h2>
+            <div class="feature-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dragon"></i>
                     </div>
+                    <h3>Magische Welt</h3>
+                    <p>Erkunde eine handgezeichnete Pixelwelt voller Geheimnisse und Magie</p>
+                    <ul class="feature-list">
+                        <li>5 einzigartige Biome</li>
+                        <li>Dynamischer Tag/Nacht-Zyklus</li>
+                        <li>Wetterereignisse</li>
+                    </ul>
                 </div>
 
-                <div class="tech-details">
-                    <h3>Technische Details</h3>
-                    <ul class="tech-list">
-                        <li>Godot Engine 4.0</li>
-                        <li>Custom Shader für Lichteffekte</li>
-                        <li>Procedural Level Generation</li>
-                        <li>State Machine für Charakteranimationen</li>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wand-sparkles"></i>
+                    </div>
+                    <h3>Kampfsystem</h3>
+                    <p>Actionreiches Kampfsystem mit verschiedenen Waffen und Zaubern</p>
+                    <ul class="feature-list">
+                        <li>12 verschiedene Waffen</li>
+                        <li>8 magische Elemente</li>
+                        <li>Kombosystem</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Story & Quests</h3>
+                    <p>Fesselnde Geschichte mit verzweigten Questlinien</p>
+                    <ul class="feature-list">
+                        <li>20+ Stunden Hauptstory</li>
+                        <li>30+ Nebenquests</li>
+                        <li>Multiple Endings</li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="project-actions">
-            <a href="#" class="btn primary-btn">
-                <i class="fas fa-play"></i>
-                Demo spielen
-            </a>
-            <a href="#" class="btn secondary-btn">
-                <i class="fab fa-github"></i>
-                Source Code
-            </a>
+        <section class="development-section glass-container">
+            <h2>Entwicklung</h2>
+            <div class="tech-details">
+                <div class="tech-item">
+                    <h3>Engine Features</h3>
+                    <ul>
+                        <li>Godot 4.0 mit GDScript</li>
+                        <li>Custom Shader für Lichteffekte</li>
+                        <li>Procedural Level Generation</li>
+                        <li>Optimierte Performance</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>Asset Creation</h3>
+                    <ul>
+                        <li>Handgezeichnete Pixel Art</li>
+                        <li>Custom Animation System</li>
+                        <li>Procedural Audio</li>
+                        <li>Particle Effects</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="roadmap-section">
+            <h2>Entwicklungs-Roadmap</h2>
+            <div class="timeline">
+                <div class="timeline-item" style="--delay: 0">
+                    <div class="timeline-content">
+                        <h3>Alpha Release</h3>
+                        <p>Mai 2025</p>
+                        <ul>
+                            <li>Core Gameplay</li>
+                            <li>3 Starter-Level</li>
+                            <li>Basic Combat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--delay: 1">
+                    <div class="timeline-content">
+                        <h3>Beta Release</h3>
+                        <p>Juli 2025</p>
+                        <ul>
+                            <li>Volle Story</li>
+                            <li>Alle Level</li>
+                            <li>Erweitertes Combat</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--delay: 2">
+                    <div class="timeline-content">
+                        <h3>Full Release</h3>
+                        <p>September 2025</p>
+                        <ul>
+                            <li>Polishing</li>
+                            <li>Achievements</li>
+                            <li>Extras & Secrets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section glass-container">
+            <h2>Interesse?</h2>
+            <p>Sei Teil der Entwicklung und teste die Alpha-Version!</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn primary-action">
+                    <i class="fas fa-download"></i>
+                    Demo herunterladen
+                </a>
+                <a href="#" class="btn secondary-action">
+                    <i class="fab fa-discord"></i>
+                    Discord beitreten
+                </a>
+            </div>
         </div>
     </main>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

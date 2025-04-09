@@ -183,4 +183,58 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
         });
     });
+
+    // Timeline Animation
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    // Set animation order for timeline items
+    timelineItems.forEach((item, index) => {
+        item.style.setProperty('--animation-order', index);
+    });
+
+    // Intersection Observer for timeline animation
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationPlayState = 'running';
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Observe timeline items
+    timelineItems.forEach(item => {
+        item.style.animationPlayState = 'paused';
+        timelineObserver.observe(item);
+    });
+});
+
+// Animate timeline path when in view
+const animateTimelinePath = () => {
+    const timelinePath = document.querySelector('.timeline-path');
+    if (!timelinePath) return;
+
+    const pathObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                timelinePath.style.animation = 'drawPath 2s ease forwards';
+            }
+        });
+    }, { threshold: 0.2 });
+
+    pathObserver.observe(timelinePath);
+};
+
+animateTimelinePath();
+
+// Add hover effect to timeline dots
+document.querySelectorAll('.timeline-dot').forEach(dot => {
+    dot.addEventListener('mouseover', () => {
+        dot.style.transform = 'scale(1.5)';
+        dot.style.boxShadow = '0 0 0 8px rgba(var(--primary-rgb), 0.2)';
+    });
+
+    dot.addEventListener('mouseout', () => {
+        dot.style.transform = 'scale(1)';
+        dot.style.boxShadow = '0 0 0 4px rgba(var(--primary-rgb), 0.2)';
+    });
 });
