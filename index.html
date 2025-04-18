@@ -365,7 +365,703 @@
                         </div>
                         <div class="contact-details">
                             <h3>Standort</h3>
-                            <p>München, Deutschland</p>
+                            <p>München, Deutschland. # PQ-Tree-Algorithmus: Umfassende Dokumentation
+
+                                ## 1. Problemverständnis: Annas Stundenplan-AG
+                                
+                                ### 1.1 Problembeschreibung
+                                Anna möchte an ihrer Schule eine neue AG gründen und hat einen Aushang erstellt, in dem sich Interessierte eintragen können. Die Teilnehmer geben an, zu welchen Uhrzeiten (16:00, 17:00, 18:00, 19:00) sie teilnehmen können, und markieren dies mit „✓" für "kann teilnehmen" und „✗" für "kann nicht teilnehmen".
+                                
+                                Leider hat Annas kleiner Bruder den Aushang beschädigt: Erst hat er die Zeile mit den Uhrzeiten abgeschnitten und dann alle Spalten auseinandergeschnitten, sodass Anna nicht mehr weiß, welche Spalte zu welcher Uhrzeit gehört.
+                                
+                                ### 1.2 Anforderung
+                                Anna kann sich nur noch daran erinnern, dass für jede Person die Zeitpunkte, zu denen sie teilnehmen kann (✓), einen zusammenhängenden Zeitblock bilden müssen. Eine Anordnung der Spalten ist nur "zulässig", wenn in jeder Zeile alle ✓-Einträge einen zusammenhängenden Block bilden.
+                                
+                                ### 1.3 Aufgabenanalyse
+                                Die Aufgaben verlangen:
+                                a) Ein Programm, das überprüft, ob die Spalten so umgeordnet werden können, dass eine zulässige Anordnung entsteht.
+                                b) Die Prüfung, ob eine gefundene zulässige Anordnung eindeutig ist.
+                                c) Eine Anpassung, falls Anna sich an ihre eigene Zeile erinnert.
+                                d) Eine Erweiterung für unleserliche Einträge (?).
+                                e) Eine Optimierung, um möglichst wenige Änderungen vorzunehmen.
+                                
+                                ## 2. PQ-Tree: Grundlegendes Konzept
+                                
+                                ### 2.1 Was ist ein PQ-Tree?
+                                Ein PQ-Tree ist eine Datenstruktur, die alle möglichen Permutationen von Elementen repräsentiert, die bestimmte Einschränkungen erfüllen. In unserem Fall repräsentiert der PQ-Tree alle möglichen Anordnungen der Uhrzeiten-Spalten, bei denen für jede Person die Teilnahmezeiten einen zusammenhängenden Block bilden.
+                                
+                                ### 2.2 Knotentypen im PQ-Tree
+                                1. **Blattknoten (Leaf Nodes)**: Repräsentieren die einzelnen Elemente (hier: die Spalten/Uhrzeiten).
+                                2. **P-Knoten (Permutation Nodes)**: Erlauben beliebige Permutation ihrer Kindknoten.
+                                3. **Q-Knoten (Sequence Nodes)**: Erlauben nur die ursprüngliche Reihenfolge oder die umgekehrte Reihenfolge ihrer Kindknoten.
+                                
+                                ### 2.3 Visuelle Darstellung
+                                - P-Knoten werden typischerweise als Kreise dargestellt: ○
+                                - Q-Knoten werden als Rechtecke dargestellt: □
+                                - Blattknoten werden oft als Labels dargestellt: [16:00]
+                                
+                                ### 2.4 Funktionsweise
+                                Der PQ-Tree wird initial mit einem einzigen P-Knoten erstellt, der alle Elemente (Spalten) als Kindknoten hat. Dann werden für jede Zeile (Person) Einschränkungen hinzugefügt, und der Baum wird entsprechend angepasst, um nur noch Permutationen zu repräsentieren, die diese Einschränkungen erfüllen.
+                                
+                                ## 3. PQ-Tree auf Annas Problem anwenden
+                                
+                                ### 3.1 Initialisierung des PQ-Trees
+                                Wir beginnen mit einem P-Knoten, der alle vier Spalten (die zu den Zeiten 16:00, 17:00, 18:00 und 19:00 gehören) als Kinder hat. Da wir nicht wissen, welche Spalte zu welcher Uhrzeit gehört, nummerieren wir sie einfach von 1 bis 4 (von links nach rechts in der aktuellen Anordnung).
+                                
+                                ```
+                                     ○ (P-Node)
+                                  /  |  |  \
+                                [1] [2] [3] [4]
+                                ```
+                                
+                                ### 3.2 Analysieren der ersten Matrix
+                                Aus der ersten Matrix können wir folgende Informationen ablesen:
+                                - Anna: ✓ in Spalten 1, 2 / ✗ in Spalten 3, 4
+                                - Bob: ✓ in Spalten 1, 2, 3 / ✗ in Spalte 4
+                                - Charlie: ✓ in Spalten 3, 4 / ✗ in Spalten 1, 2
+                                - David: ✓ in Spalten 2, 3 / ✗ in Spalten 1, 4
+                                
+                                ### 3.3 Anwendung des Algorithmus Schritt für Schritt
+                                
+                                #### 3.3.1 Schritt 1: Anna's Zeile verarbeiten
+                                Anna hat ✓ in Spalten 1 und 2. Wir markieren diese Spalten als eine zusammenhängende Menge S₁ = {1, 2}.
+                                
+                                1. Markierung:
+                                   - Blätter 1 und 2 als "full"
+                                   - Blätter 3 und 4 als "empty"
+                                
+                                2. Aggregieren:
+                                   - Der P-Knoten hat "full" und "empty" Kinder, also ist er "partial"
+                                
+                                3. Umstrukturieren:
+                                   - Die "full" Kinder (1, 2) müssen zusammenhängend sein, also ersetzen wir sie durch einen Q-Knoten
+                                
+                                ```
+                                     ○ (P-Node)
+                                  /        \
+                                 □ (Q-Node) |  \
+                                / \        [3] [4]
+                                [1] [2]
+                                ```
+                                
+                                #### 3.3.2 Schritt 2: Bob's Zeile verarbeiten
+                                Bob hat ✓ in Spalten 1, 2 und 3. Wir markieren diese Spalten als eine zusammenhängende Menge S₂ = {1, 2, 3}.
+                                
+                                1. Markierung:
+                                   - Blätter 1, 2 und 3 als "full"
+                                   - Blatt 4 als "empty"
+                                
+                                2. Aggregieren:
+                                   - Der P-Knoten hat "full" und "empty" Kinder, also ist er "partial"
+                                   - Der Q-Knoten hat nur "full" Kinder, also ist er "full"
+                                
+                                3. Umstrukturieren:
+                                   - Der Q-Knoten (mit 1 und 2) ist bereits "full"
+                                   - Blatt 3 ist auch "full"
+                                   - Da alle "full" Elemente zusammenhängend sein müssen, müssen 1, 2 und 3 zusammenhängend sein
+                                   - Wir erweitern den Q-Knoten um Blatt 3
+                                
+                                ```
+                                     ○ (P-Node)
+                                  /        \
+                                 □ (Q-Node)  \
+                                / | \        [4]
+                                [1][2][3]
+                                ```
+                                
+                                #### 3.3.3 Schritt 3: Charlie's Zeile verarbeiten
+                                Charlie hat ✓ in Spalten 3 und 4. Wir markieren diese Spalten als eine zusammenhängende Menge S₃ = {3, 4}.
+                                
+                                1. Markierung:
+                                   - Blätter 3 und 4 als "full"
+                                   - Blätter 1 und 2 als "empty"
+                                
+                                2. Aggregieren:
+                                   - Der P-Knoten hat "full" und "empty" Kinder, also ist er "partial"
+                                   - Der Q-Knoten hat "full" und "empty" Kinder, also ist er "partial"
+                                
+                                3. Umstrukturieren:
+                                   - In unserem aktuellen Baum ist 3 im Q-Knoten mit 1 und 2, aber 4 ist außerhalb
+                                   - Charlie's Anforderung verlangt, dass 3 und 4 zusammenhängend sind
+                                   - Wir müssen den Baum umstrukturieren
+                                
+                                Da wir jetzt eine Situation haben, wo ein Element (3) in zwei verschiedenen zusammenhängenden Gruppen sein muss (mit 1, 2 für Bob und mit 4 für Charlie), müssen wir die Q-Knoten anpassen. Es gibt nur eine mögliche Anordnung, bei der alle diese Bedingungen erfüllt sind:
+                                
+                                ```
+                                     □ (Q-Node)
+                                / | | \
+                                [1][2][3][4]
+                                ```
+                                
+                                oder die umgekehrte Reihenfolge:
+                                
+                                ```
+                                     □ (Q-Node)
+                                / | | \
+                                [4][3][2][1]
+                                ```
+                                
+                                #### 3.3.4 Schritt 4: David's Zeile verarbeiten
+                                David hat ✓ in Spalten 2 und 3. Wir markieren diese Spalten als eine zusammenhängende Menge S₄ = {2, 3}.
+                                
+                                1. Markierung:
+                                   - Blätter 2 und 3 als "full"
+                                   - Blätter 1 und 4 als "empty"
+                                
+                                2. Aggregieren:
+                                   - Der Q-Knoten hat "full" und "empty" Kinder, also ist er "partial"
+                                
+                                3. Umstrukturieren:
+                                   - In unserem aktuellen Baum sind 2 und 3 bereits zusammenhängend
+                                   - Es ist keine weitere Umstrukturierung notwendig
+                                
+                                ### 3.4 Ergebnis
+                                Nach der Verarbeitung aller Zeilen hat unser PQ-Tree die Form:
+                                
+                                ```
+                                     □ (Q-Node)
+                                / | | \
+                                [1][2][3][4]
+                                ```
+                                
+                                oder die umgekehrte Reihenfolge. Dies bedeutet, dass es nur zwei mögliche zulässige Anordnungen gibt:
+                                1. Spalte 1, Spalte 2, Spalte 3, Spalte 4
+                                2. Spalte 4, Spalte 3, Spalte 2, Spalte 1
+                                
+                                Um zu bestimmen, welche dieser Anordnungen der ursprünglichen Reihenfolge entspricht (16:00, 17:00, 18:00, 19:00), müssten wir zusätzliche Informationen haben.
+                                
+                                ## 4. Implementierung des PQ-Tree-Algorithmus
+                                
+                                ### 4.1 Datenstrukturen
+                                
+                                ```python
+                                class Node:
+                                    def __init__(self, node_type, children=None):
+                                        self.type = node_type  # 'P', 'Q', or 'leaf'
+                                        self.children = children if children else []
+                                        self.value = None  # Nur für Blattknoten relevant
+                                        
+                                class PQTree:
+                                    def __init__(self, elements):
+                                        # Erstelle Blattknoten für jedes Element
+                                        leaves = [Node('leaf') for _ in range(len(elements))]
+                                        for i, leaf in enumerate(leaves):
+                                            leaf.value = i + 1  # Spaltenindex (1-basiert)
+                                        
+                                        # Erstelle einen P-Knoten als Wurzel
+                                        self.root = Node('P', leaves)
+                                        self.elements = elements
+                                ```
+                                
+                                ### 4.2 Hauptalgorithmus
+                                
+                                ```python
+                                def reduce(tree, subset):
+                                    """
+                                    Aktualisiert den PQ-Tree, sodass in allen möglichen Permutationen
+                                    die Elemente in der Teilmenge subset zusammenhängend sind.
+                                    
+                                    Returns:
+                                        bool: True, wenn eine gültige Permutation existiert, sonst False
+                                    """
+                                    # Markierungsphase: Markiere Knoten als 'full', 'empty' oder 'partial'
+                                    mark_nodes(tree.root, subset)
+                                    
+                                    # Umstrukturierungsphase
+                                    result = restructure(tree.root)
+                                    
+                                    return result
+                                
+                                def mark_nodes(node, subset):
+                                    """
+                                    Markiert jeden Knoten im Baum als 'full', 'empty' oder 'partial'
+                                    basierend auf der Teilmenge 'subset'.
+                                    """
+                                    if node.type == 'leaf':
+                                        node.mark = 'full' if node.value in subset else 'empty'
+                                        return node.mark
+                                    
+                                    # Markiere rekursiv alle Kindknoten
+                                    child_marks = [mark_nodes(child, subset) for child in node.children]
+                                    
+                                    # Bestimme die Markierung des aktuellen Knotens
+                                    if all(mark == 'full' for mark in child_marks):
+                                        node.mark = 'full'
+                                    elif all(mark == 'empty' for mark in child_marks):
+                                        node.mark = 'empty'
+                                    else:
+                                        node.mark = 'partial'
+                                        
+                                    return node.mark
+                                
+                                def restructure(node):
+                                    """
+                                    Restrukturiert den Teilbaum mit Wurzel 'node' gemäß den PQ-Tree-Regeln.
+                                    """
+                                    if node.mark == 'full' or node.mark == 'empty':
+                                        return True
+                                        
+                                    if node.type == 'P':
+                                        return restructure_p_node(node)
+                                    elif node.type == 'Q':
+                                        return restructure_q_node(node)
+                                ```
+                                
+                                ### 4.3 Spezifische Umstrukturierungsfunktionen
+                                
+                                ```python
+                                def restructure_p_node(node):
+                                    """
+                                    Restrukturiert einen P-Knoten gemäß den PQ-Tree-Regeln.
+                                    """
+                                    # Gruppiere Kinder nach Markierung
+                                    full_children = [c for c in node.children if c.mark == 'full']
+                                    empty_children = [c for c in node.children if c.mark == 'empty']
+                                    partial_children = [c for c in node.children if c.mark == 'partial']
+                                    
+                                    # Überprüfe, ob alle partiellen Kinder erfolgreich umstrukturiert werden können
+                                    for child in partial_children:
+                                        if not restructure(child):
+                                            return False
+                                    
+                                    # Wenn es mehr als ein volles Kind gibt, erstelle einen neuen Q-Knoten
+                                    if len(full_children) > 1:
+                                        q_node = Node('Q', full_children)
+                                        q_node.mark = 'full'
+                                        
+                                        # Ersetze die vollen Kinder durch den neuen Q-Knoten
+                                        node.children = [c for c in node.children if c.mark != 'full']
+                                        node.children.append(q_node)
+                                    
+                                    return True
+                                
+                                def restructure_q_node(node):
+                                    """
+                                    Restrukturiert einen Q-Knoten gemäß den PQ-Tree-Regeln.
+                                    """
+                                    # Überprüfe, ob alle vollen Kinder zusammenhängend sind
+                                    full_indices = [i for i, child in enumerate(node.children) if child.mark == 'full']
+                                    
+                                    if not full_indices:
+                                        return True
+                                        
+                                    # Überprüfe, ob die vollen Kinder einen zusammenhängenden Block bilden
+                                    if max(full_indices) - min(full_indices) + 1 != len(full_indices):
+                                        return False  # Keine zusammenhängenden vollen Kinder
+                                    
+                                    # Überprüfe rekursiv alle partiellen Kinder
+                                    for child in node.children:
+                                        if child.mark == 'partial' and not restructure(child):
+                                            return False
+                                            
+                                    return True
+                                ```
+                                
+                                ### 4.4 Extraktion einer gültigen Permutation
+                                
+                                ```python
+                                def get_frontier(node):
+                                    """
+                                    Extrahiert die aktuelle Permutation (Grenze) des PQ-Trees.
+                                    """
+                                    if node.type == 'leaf':
+                                        return [node.value]
+                                        
+                                    frontier = []
+                                    for child in node.children:
+                                        frontier.extend(get_frontier(child))
+                                        
+                                    return frontier
+                                ```
+                                
+                                ## 5. Anwendung auf die Aufgabenstellungen
+                                
+                                ### 5.1 Aufgabe a): Überprüfen der Umordnungsmöglichkeit
+                                
+                                ```python
+                                def check_valid_arrangement(matrix):
+                                    """
+                                    Überprüft, ob eine gültige Anordnung der Spalten existiert.
+                                    
+                                    Args:
+                                        matrix: Eine Liste von Listen, die die Matrix repräsentiert
+                                               matrix[i][j] ist der Eintrag in Zeile i, Spalte j
+                                               
+                                    Returns:
+                                        tuple: (valid, permutation)
+                                               valid ist True, wenn eine gültige Anordnung existiert
+                                               permutation ist eine mögliche gültige Permutation oder None
+                                    """
+                                    n_cols = len(matrix[0])
+                                    elements = list(range(1, n_cols + 1))
+                                    tree = PQTree(elements)
+                                    
+                                    for row in matrix:
+                                        # Finde die Spaltenindizes mit ✓
+                                        checkmarks = [i + 1 for i, val in enumerate(row) if val == '✓']
+                                        
+                                        # Reduziere den Baum
+                                        if not reduce(tree, checkmarks):
+                                            return False, None
+                                    
+                                    # Extrahiere eine gültige Permutation
+                                    permutation = get_frontier(tree.root)
+                                    return True, permutation
+                                ```
+                                
+                                ### 5.2 Aufgabe b): Prüfen der Eindeutigkeit
+                                
+                                ```python
+                                def is_unique_arrangement(tree):
+                                    """
+                                    Überprüft, ob der PQ-Tree eine eindeutige Permutation repräsentiert.
+                                    
+                                    Args:
+                                        tree: Der PQ-Tree
+                                        
+                                    Returns:
+                                        bool: True, wenn nur eine Permutation möglich ist, sonst False
+                                    """
+                                    # Eindeutigkeit liegt vor, wenn der Baum nur aus einem einzigen Q-Knoten besteht
+                                    # oder nur aus einem einzigen Blatt
+                                    node = tree.root
+                                    
+                                    # Fall 1: Ein einzelnes Blatt
+                                    if node.type == 'leaf':
+                                        return True
+                                        
+                                    # Fall 2: Ein Q-Knoten (oder verschachtelter Q-Knoten)
+                                    if node.type == 'Q':
+                                        # Überprüfe rekursiv alle Kinder
+                                        for child in node.children:
+                                            if child.type == 'P':
+                                                # Ein P-Knoten erlaubt mehrere Permutationen
+                                                return False
+                                            if child.type == 'Q' and not is_unique_arrangement(PQTree([0] * len(tree.elements), root=child)):
+                                                return False
+                                        return True
+                                        
+                                    # Fall 3: Ein P-Knoten mit mehr als einem Kind erlaubt mehrere Permutationen
+                                    if node.type == 'P' and len(node.children) > 1:
+                                        return False
+                                        
+                                    # Fall 4: Ein P-Knoten mit einem einzigen Kind
+                                    if node.type == 'P' and len(node.children) == 1:
+                                        return is_unique_arrangement(PQTree([0] * len(tree.elements), root=node.children[0]))
+                                        
+                                    return True
+                                ```
+                                
+                                ### 5.3 Aufgabe c): Berücksichtigung von Annas eigener Zeile
+                                
+                                ```python
+                                def check_with_anna_row(matrix, anna_row):
+                                    """
+                                    Überprüft, ob eine gültige Anordnung existiert, wenn Annas Zeile bekannt ist.
+                                    
+                                    Args:
+                                        matrix: Eine Liste von Listen, die die Matrix repräsentiert
+                                        anna_row: Eine Liste mit Annas Einträgen (✓/✗)
+                                        
+                                    Returns:
+                                        tuple: (valid, permutation)
+                                    """
+                                    # Füge Annas Zeile zur Matrix hinzu
+                                    new_matrix = [anna_row] + matrix
+                                    
+                                    # Führe die normale Überprüfung durch
+                                    return check_valid_arrangement(new_matrix)
+                                ```
+                                
+                                ### 5.4 Aufgabe d): Umgang mit unleserlichen Einträgen
+                                
+                                ```python
+                                def check_with_unreadable_entries(matrix):
+                                    """
+                                    Findet eine gültige Anordnung, auch wenn einige Einträge unleserlich sind.
+                                    
+                                    Args:
+                                        matrix: Eine Liste von Listen mit Einträgen (✓/✗/?)
+                                        
+                                    Returns:
+                                        tuple: (valid, permutation, replacements)
+                                               replacements ist ein Dictionary, das angibt, wie die ?-Einträge
+                                               ersetzt wurden: {(row, col): replacement}
+                                    """
+                                    n_rows = len(matrix)
+                                    n_cols = len(matrix[0])
+                                    replacements = {}
+                                    
+                                    # Kopiere die Matrix, um die Originaleinträge nicht zu verändern
+                                    working_matrix = [row[:] for row in matrix]
+                                    
+                                    # Ersetze zunächst alle ?-Einträge durch ✓
+                                    for i in range(n_rows):
+                                        for j in range(n_cols):
+                                            if working_matrix[i][j] == '?':
+                                                working_matrix[i][j] = '✓'
+                                                replacements[(i, j)] = '✓'
+                                    
+                                    # Überprüfe, ob mit diesen Ersetzungen eine gültige Anordnung existiert
+                                    valid, perm = check_valid_arrangement(working_matrix)
+                                    
+                                    # Wenn ja, gib diese Lösung zurück
+                                    if valid:
+                                        return valid, perm, replacements
+                                        
+                                    # Sonst versuche, einige ?-Einträge durch ✗ zu ersetzen
+                                    # Für jeden ?-Eintrag versuchen wir beide Möglichkeiten
+                                    question_marks = [(i, j) for i in range(n_rows) for j in range(n_cols) if matrix[i][j] == '?']
+                                    
+                                    # Brute-Force-Ansatz (für eine kleine Anzahl von ?-Einträgen praktikabel)
+                                    for combination in all_combinations(len(question_marks)):
+                                        # Kopiere die Originalmatrix
+                                        working_matrix = [row[:] for row in matrix]
+                                        replacements = {}
+                                        
+                                        # Ersetze die ?-Einträge gemäß der aktuellen Kombination
+                                        for idx, (i, j) in enumerate(question_marks):
+                                            replacement = '✓' if combination[idx] else '✗'
+                                            working_matrix[i][j] = replacement
+                                            replacements[(i, j)] = replacement
+                                            
+                                        # Überprüfe, ob mit diesen Ersetzungen eine gültige Anordnung existiert
+                                        valid, perm = check_valid_arrangement(working_matrix)
+                                        
+                                        if valid:
+                                            return valid, perm, replacements
+                                            
+                                    return False, None, {}
+                                ```
+                                
+                                Hilfsfunktion für alle Kombinationen:
+                                
+                                ```python
+                                def all_combinations(n):
+                                    """
+                                    Generiert alle möglichen binären Kombinationen der Länge n.
+                                    """
+                                    if n == 0:
+                                        return [[]]
+                                        
+                                    smaller_combinations = all_combinations(n - 1)
+                                    return [comb + [0] for comb in smaller_combinations] + [comb + [1] for comb in smaller_combinations]
+                                ```
+                                
+                                ### 5.5 Aufgabe e): Minimale Änderungen
+                                
+                                ```python
+                                def minimize_changes(matrix):
+                                    """
+                                    Findet die minimale Anzahl von Änderungen, um eine gültige Anordnung zu erhalten.
+                                    
+                                    Args:
+                                        matrix: Eine Liste von Listen mit Einträgen (✓/✗/?)
+                                        
+                                    Returns:
+                                        tuple: (valid, permutation, changes)
+                                               changes ist eine Liste von (row, col, old_val, new_val)
+                                    """
+                                    n_rows = len(matrix)
+                                    n_cols = len(matrix[0])
+                                    
+                                    # Überprüfe zunächst, ob die Matrix bereits eine gültige Anordnung hat
+                                    valid, perm = check_valid_arrangement(matrix)
+                                    if valid:
+                                        return valid, perm, []
+                                        
+                                    # Wenn nicht, versuche mit zunehmender Anzahl von Änderungen
+                                    for num_changes in range(1, n_rows * n_cols + 1):
+                                        for changes in all_possible_changes(matrix, num_changes):
+                                            # Wende die Änderungen an
+                                            working_matrix = apply_changes(matrix, changes)
+                                            
+                                            # Überprüfe, ob diese Änderungen zu einer gültigen Anordnung führen
+                                            valid, perm = check_valid_arrangement(working_matrix)
+                                            
+                                            if valid:
+                                                return valid, perm, changes
+                                                
+                                    return False, None, []
+                                ```
+                                
+                                Hilfsfunktionen:
+                                
+                                ```python
+                                def apply_changes(matrix, changes):
+                                    """
+                                    Wendet eine Liste von Änderungen auf die Matrix an.
+                                    
+                                    Args:
+                                        matrix: Die Originalmatrix
+                                        changes: Eine Liste von (row, col, new_val)
+                                        
+                                    Returns:
+                                        Eine neue Matrix mit den angewendeten Änderungen
+                                    """
+                                    result = [row[:] for row in matrix]
+                                    
+                                    for row, col, new_val in changes:
+                                        result[row][col] = new_val
+                                        
+                                    return result
+                                ```
+                                
+                                ```python
+                                def all_possible_changes(matrix, num_changes):
+                                    """
+                                    Generiert alle möglichen Kombinationen von 'num_changes' Änderungen.
+                                    
+                                    Dies ist ein vereinfachter Ansatz, der für kleine Matrizen praktikabel ist.
+                                    Für große Matrizen wäre ein heuristischer Ansatz besser.
+                                    """
+                                    n_rows = len(matrix)
+                                    n_cols = len(matrix[0])
+                                    
+                                    # Alle möglichen Zellen und deren mögliche neue Werte
+                                    all_changes = []
+                                    for i in range(n_rows):
+                                        for j in range(n_cols):
+                                            if matrix[i][j] == '✓':
+                                                all_changes.append((i, j, '✗'))
+                                            elif matrix[i][j] == '✗':
+                                                all_changes.append((i, j, '✓'))
+                                                
+                                    # Generiere alle Kombinationen von 'num_changes' Änderungen
+                                    return itertools.combinations(all_changes, num_changes)
+                                ```
+                                
+                                ## 6. Zusammenfassung und Anwendung auf das gegebene Problem
+                                
+                                ### 6.1 Komplexität des PQ-Tree-Algorithmus
+                                - **Zeitkomplexität**: O(n), wobei n die Anzahl der Elemente (Spalten) ist.
+                                - **Speicherkomplexität**: O(n), da der Baum maximal O(n) Knoten enthält.
+                                
+                                ### 6.2 Vorteile des PQ-Tree-Algorithmus
+                                1. **Effizienz**: Der Algorithmus ist linear in der Anzahl der Elemente.
+                                2. **Vollständigkeit**: Er findet alle möglichen Permutationen, die die Einschränkungen erfüllen.
+                                3. **Flexibilität**: Er kann für verschiedene Arten von konsekutiven Einschränkungen verwendet werden.
+                                
+                                ### 6.3 Grenzen und Herausforderungen
+                                1. **Komplexe Implementierung**: Die Umstrukturierungsregeln sind komplex und fehleranfällig.
+                                2. **Eingeschränkter Anwendungsbereich**: Der Algorithmus ist nur für konsekutive Einschränkungen geeignet.
+                                3. **Behandlung von Ausnahmen**: Die Behandlung von unleserlichen Einträgen oder die Minimierung von Änderungen erfordert zusätzliche Algorithmen.
+                                
+                                ### 6.4 Lösung für Annas Problem
+                                Für das konkrete Problem von Anna:
+                                1. Es existiert eine gültige Anordnung der Spalten.
+                                2. Die Anordnung ist nicht eindeutig; es gibt genau zwei mögliche Anordnungen: die ursprüngliche und die umgekehrte.
+                                3. Wenn Anna sich an ihre eigene Zeile erinnert, könnte die Anordnung eindeutig werden.
+                                4. Bei unleserlichen Einträgen kann der Algorithmus versuchen, diese so zu ersetzen, dass eine gültige Anordnung entsteht.
+                                5. Bei der Minimierung von Änderungen sucht der Algorithmus nach der kleinsten Anzahl von Änderungen, die zu einer gültigen Anordnung führen.
+                                
+                                Durch den PQ-Tree-Algorithmus kann Anna den Stundenplan für ihre AG erfolgreich rekonstruieren und eine gültige Zuordnung der Spalten zu den Uhrzeiten finden.
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                                Verse 1
+                                Met you on a Wednesday night
+                                Mafia cards dealt out right
+                                You called me sus with that smile
+                                I tried to play it cool for a while
+                                Halfway conversations
+                                Between accusations
+                                The way you lean when you're thinking
+                                Got me overthinking
+                                Verse 2
+                                Back home, phone lights up late
+                                My friend says you slid in his DMs straight
+                                He's barely checking his notifications
+                                While I'm stuck in these situations
+                                Playing it off like whatever
+                                While my stomach ties in knots like leather
+                                He says "she's cool" with a shrug
+                                While I'm caught in a tug
+                                Chorus
+                                I just wanna know your tells
+                                Beyond these game night spells
+                                Your laugh when you're the villain
+                                Got me feeling like I'm winning
+                                Even when I'm losing
+                                Even when I'm losing
+                                Verse 3
+                                Three texts and you're on my mind
+                                My friend's phone buzz but he's blind
+                                To the way your words curve like your smile
+                                The way you make time worthwhile
+                                He leaves you on read for days
+                                While I'm counting the ways
+                                To ask you to hang without saying
+                                My thoughts have been straying
+                                Chorus
+                                I just wanna know your tells
+                                Beyond these game night spells
+                                Your laugh when you're the villain
+                                Got me feeling like I'm winning
+                                Even when I'm losing
+                                Even when I'm losing
+                                Bridge
+                                No need to fake being dead
+                                When the real game's in my head
+                                Caught between loyalty and what I want
+                                The night's got me feeling nonchalant
+                                But truth is I'm thinking of your voice
+                                Making accusations, making noise
+                                In this game of chance and deception
+                                You've got my full attention
+                                Chorus
+                                I just wanna know your tells
+                                Beyond these game night spells
+                                Your laugh when you're the villain
+                                Got me feeling like I'm winning
+                                Even when I'm losing
+                                I'm still choosing
+                                To keep playing</p>
                         </div>
                     </div>
                     <div class="social-links">
